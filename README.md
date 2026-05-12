@@ -1,16 +1,104 @@
-# React + Vite
+# P@55W0Rd G9&9R6T0R
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, BMW M-inspired password generator built with React and Vite. Generates cryptographically sound passwords with fine-grained control over length, character sets, and embedded memorable strings.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Adjustable Length** — slide from 8 to 32 characters
+- **Character Set Toggles** — include/exclude numbers and symbols independently
+- **Suggestion Embedding** — weave a memorable word or phrase into the generated password
+- **Strength Indicator** — real-time feedback (Weak / Fair / Good / Strong)
+- **One-Click Copy** — copy to clipboard with visual confirmation
+- **Auto-Generate** — new password generated instantly on any setting change
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Tool | Version |
+|------|---------|
+| React | 19 |
+| Vite | 8 |
+| Tailwind CSS | 4 |
+| Lucide React | 1.14 |
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── PasswordGenerator.jsx   # Root state + orchestration
+│   ├── PasswordDisplay.jsx     # Output field with copy & refresh actions
+│   ├── Controls.jsx            # Slider, toggles, and suggestion input
+│   └── StrengthIndicator.jsx   # Strength score and bar visualisation
+├── App.jsx                     # Layout and branding shell
+├── main.jsx                    # React entry point
+└── index.css                   # Global styles and CSS custom properties
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Install
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+---
+
+## How Password Generation Works
+
+Every password guarantees at minimum one lowercase letter and one uppercase letter. When enabled, at least one number and one symbol are also injected. The suggestion string (if provided) is embedded verbatim after stripping whitespace. All segments are then combined and shuffled using a Fisher-Yates algorithm, so the suggestion position is never predictable.
+
+```
+password = shuffle([required chars] + [suggestion] + [random fill])
+```
+
+The suggestion is capped at `length − 4` characters to always leave room for the required character classes.
+
+---
+
+## Strength Scoring
+
+| Score | Label  | Criteria |
+|-------|--------|----------|
+| ≤ 1   | WEAK   | Short length only |
+| 2     | FAIR   | Length > 8 or one character class |
+| 3     | GOOD   | Length ≥ 12 + one character class |
+| 4     | STRONG | Length ≥ 12 + numbers + symbols |
+
+---
+
+## Design
+
+The UI follows a BMW M motorsport aesthetic: black canvas, white typography, and the signature M tricolour stripe (blue / dark blue / red) as a visual anchor. All surface tokens, colours, and spacing are defined as CSS custom properties in `index.css`.
