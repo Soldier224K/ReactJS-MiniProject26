@@ -1,6 +1,6 @@
 # P@55W0Rd G9&9R6T0R
 
-A sleek, BMW M-inspired password generator built with React and Vite. Generates cryptographically sound passwords with fine-grained control over length, character sets, and embedded memorable strings.
+A sleek,  password generator built with React and Vite. Generates cryptographically sound passwords with fine-grained control over length, character sets, and embedded memorable strings.
 
 ---
 
